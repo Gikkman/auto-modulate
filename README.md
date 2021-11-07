@@ -1,6 +1,6 @@
 # auto-modulate
 
-A small program for automatically making modulations on all images in a particular folder. It can be changing saturation, hue or brightness (or lightness). Modulations used are outlined on the [SharpJS documentation}(https://sharp.pixelplumbing.com/api-operation#modulate).
+A small program for automatically making modulations on all images in a particular folder. It can be changing saturation, hue or brightness (or lightness). Modulations used are outlined on the [SharpJS documentation](https://sharp.pixelplumbing.com/api-operation#modulate).
 
 # Install
 `npm install` - Will install all dependenceies
