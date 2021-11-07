@@ -4,7 +4,7 @@
   "description": "A programf or automatically applying an overlay on a collection of images",
   "scripts": {
     "prebuild": "rm -rf release & npm run compile",
-    "build": "pkg build/main.js --target=node14-win-x64 --out-path=release",
+    "build": "pkg build/main.js --target=node14-win-x64 -o release/auto-modulate",
     "postbuild": "copyfiles -u 1 \"node_modules/sharp/**/*\" release & copyfiles \"test_input/**/*\" auto-modulate.properties release",
     "compile": "tsc",
     "start": "node build/main.js",
