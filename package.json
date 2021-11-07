@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "A programf or automatically applying an overlay on a collection of images",
   "scripts": {
-    "prebuild": "npm run compile",
-    "build": "pkg build/main.js --target=node14-win-x64",
+    "prebuild": "rm -rf release & npm run compile",
+    "build": "pkg build/main.js --target=node14-win-x64 --out-path=release",
+    "postbuild": "copyfiles -u 1 \"node_modules/sharp/**/*\" release & copyfiles \"test_input/**/*\" auto-modulate.properties release",
     "compile": "tsc",
     "start": "node build/main.js",
     "test": "test",
@@ -24,6 +25,7 @@
     "@types/node": "^16.9.4",
     "@types/properties-reader": "^2.1.1",
     "@types/sharp": "^0.29.2",
+    "copyfiles": "^2.4.1",
     "pkg": "^5.4.1",
     "typescript": "^4.4.3"
   },

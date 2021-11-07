@@ -16,7 +16,9 @@ Configuration for the program resides in the `auto-overlay.properties` file. You
 `npm run build` - Will build a Windows executable
 
 # Example
-Clone the repo and run the install and run commands, or download the latest release zip from the [Releases page](https://github.com/Gikkman/auto-modulate/releases/latest), extract it and run the executable to see the program in action. It'll take all images in the `test_input` directory and apply the modulations outlined in the `auto-modulate.properties` file to them. The results are outputted into a folder named `test_output`, retaining the folder and file structure of the input.
+Download the latest release zip from the [Releases page](https://github.com/Gikkman/auto-modulate/releases/latest), extract it and run the executable to see the program in action. It'll take all images in the `test_input` directory and apply the modulations outlined in the `auto-modulate.properties` file to them. The results are outputted into a folder named `test_output`, retaining the folder and file structure of the input. 
+
+The folder `sharp` in the release archive contains the necessary binaries for the [SharpJS](https://sharp.pixelplumbing.com) image manipulation library to work.
 
 Input images are taken from these locations:
 * https://pixabay.com/sv/illustrations/monstera-fabrik-l%c3%a4mnar-natur-5516509/
