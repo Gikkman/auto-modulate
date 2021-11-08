@@ -5,7 +5,7 @@
   "bin": "build/main.js",
   "scripts": {
     "prebuild": "node -r fs -e \"fs.rmSync('release', {recursive:true,force:true})\" & npm run compile",
-    "build": "pkg .",
+    "build": "pkg . --compress=gzip",
     "postbuild": "copyfiles \"test_input/**/*\" auto-modulate.properties release",
     "compile": "tsc",
     "start": "ts-node src/main.ts"
