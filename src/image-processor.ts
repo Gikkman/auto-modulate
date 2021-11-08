@@ -6,7 +6,7 @@ import { getAbsolutePath } from "./paths";
 import sharp from "sharp";
 
 type Img = {inputAbsolutePath: string, outputAbsolutePath: string, outputRelativePath: string};
-type ModulationConfig = {hue: number, saturation: number, brightness: number, lightness: number};
+type ModulationConfig = {hue: number, saturation: number, brightness: number, lightness: number, contrast: number};
 let modulationConfig: ModulationConfig;
 
 export function setModulations(config: ModulationConfig) {
@@ -45,8 +45,10 @@ export async function applyModulations(folderRelativePath: string, filetree: Fil
 }
 
 async function internalApplyModulations(img: Img) {
-    const data = sharp(img.inputAbsolutePath)
+    const contrast = modulationConfig.contrast;
+    sharp(img.inputAbsolutePath)
         .modulate(modulationConfig)
+        .linear(contrast, -(128 * contrast) + 128)
         .toFile(img.outputAbsolutePath)
         .catch(e => {
             console.error("Error writing file " + img.outputAbsolutePath, e);
