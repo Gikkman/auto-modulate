@@ -33,20 +33,22 @@ export async function applyModulations(folderRelativePath: string, filetree: Fil
         });
 
     Logger.info(`Found ${filteredArray.length} images to apply modulations on.`)
+    const promises = new Array<Promise<unknown>>();
     for(const img of filteredArray) {
         try {
-            await internalApplyModulations(img);
+            promises.push(internalApplyModulations(img));
         } catch (e) {
             console.error(`[Error processing image ${img.outputRelativePath}]`);
             console.error(e);
         }
     }
+    for(const p of promises) await p;
     Logger.info("All images processed.")
 }
 
 async function internalApplyModulations(img: Img) {
     const contrast = modulationConfig.contrast;
-    sharp(img.inputAbsolutePath)
+    return sharp(img.inputAbsolutePath)
         .modulate(modulationConfig)
         .linear(contrast, -(128 * contrast) + 128)
         .toFile(img.outputAbsolutePath)
