@@ -42,13 +42,17 @@ export async function applyModulations(folderRelativePath: string, filetree: Fil
             console.error(e);
         }
     }
-    for(const p of promises) await p;
+    await Promise.all(promises);
     Logger.info("All images processed.")
 }
 
 async function internalApplyModulations(img: Img) {
     const contrast = modulationConfig.contrast;
+
+    const meta = await sharp(img.inputAbsolutePath).metadata();
+
     return sharp(img.inputAbsolutePath)
+        .withMetadata()
         .modulate(modulationConfig)
         .linear(contrast, -(128 * contrast) + 128)
         .toFile(img.outputAbsolutePath)
