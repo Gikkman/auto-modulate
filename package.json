@@ -1,6 +1,6 @@
 {
   "name": "auto-modulate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A program for automatically applying an overlay on a collection of images",
   "bin": "build/main.js",
   "scripts": {

@@ -42,20 +42,28 @@ export async function applyModulations(folderRelativePath: string, filetree: Fil
             console.error(e);
         }
     }
-    await Promise.all(promises);
+    let counter = 0;
+    for(const p of promises) {
+        await p;
+        counter++;
+        if(counter % 20 === 0)
+            Logger.info(`>>> Processed ${counter} images`)
+    }
     Logger.info("All images processed.")
 }
 
 async function internalApplyModulations(img: Img) {
     const contrast = modulationConfig.contrast;
+    const sharpInstance = sharp(img.inputAbsolutePath);
 
-    const meta = await sharp(img.inputAbsolutePath).metadata();
-
-    return sharp(img.inputAbsolutePath)
-        .withMetadata()
+    return sharpInstance
         .modulate(modulationConfig)
         .linear(contrast, -(128 * contrast) + 128)
+        .withMetadata()
         .toFile(img.outputAbsolutePath)
+        .then( () => {
+            Logger.debug(`Finished image ${img.outputRelativePath}`);
+        })
         .catch(e => {
             console.error("Error writing file " + img.outputAbsolutePath, e);
         })
